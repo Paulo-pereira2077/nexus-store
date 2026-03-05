@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet("/create-nexus")
 public class CreateNexusServlet extends HttpServlet {
@@ -16,9 +17,13 @@ public class CreateNexusServlet extends HttpServlet {
 
         String nexusName = request.getParameter("nexus-name");
 
-        System.out.println(nexusName);
+        String jsonAparelho = "{ \"nexusName\": \"" + nexusName + "\" }";
 
-        request.getRequestDispatcher("index.html").forward(request, response);
+        response.setContentType("application/json");
+
+        PrintWriter out = response.getWriter();
+        out.print(jsonAparelho);
+        out.flush();
 
     }
 }
